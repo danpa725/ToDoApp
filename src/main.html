@@ -6,11 +6,19 @@
         <title>ToDo</title>
         <link rel="stylesheet" href="./reset.css" />
         <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="../tailwind.css" />
     </head>
     <body>
         <div class="js-clock">
             <h1></h1>
         </div>
+        <h1 class="boot-message"></h1>
+
+        <form class="js-form form-remove">
+            <input type="text" placeholder="What is your name😉" />
+        </form>
+        <button type="submit" class="reset-user">❌reset user name❌</button>
     </body>
     <script src="./scripts/clock.js"></script>
+    <script src="./scripts/getUserName.js"></script>
 </html>
