@@ -1,5 +1,6 @@
 node_modules
 
+# for parcel project
 dist
 
 .cache

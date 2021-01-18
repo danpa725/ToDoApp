@@ -1,19 +1,27 @@
+import renderToDo from "./export/render";
+
 const toDoForm = document.querySelector(".todo-form");
 const toDoInput = document.querySelector("#todo-input");
-const ul = document.querySelector(".todo-list");
 
-const QUERY = "toDos";
+const QUERY_TODO = "toDos";
+const QUERY_FIN = "toDosFin";
 
 let toDos = [];
+let toDosFin = [];
 
-const loadToDo = () => {
+const DELETE = "deleteToDo";
+const POSTPONE = "postponeToDo";
+const RETURN = "returnToDo";
+const DELETE_FIN = "deleteFin";
+
+const loadToDo = (QUERY, setArr) => {
     let dbToDo = localStorage.getItem(QUERY);
     dbToDo = JSON.parse(dbToDo);
     if (dbToDo !== null) {
         const dbToDos = Object.values(dbToDo);
         dbToDos.forEach((toDo) => {
-            toDos.push(toDo);
-            renderer(toDo.text, toDo.id);
+            setArr.push(toDo);
+            renderToDo(toDo.text, toDo.id, toDo.fin);
         });
     }
 };
@@ -26,51 +34,113 @@ const getText = (target) => {
 
 const handleToDo = (e) => {
     e.preventDefault();
-    const toDo = getText(toDoInput);
+    const text = getText(toDoInput);
     const toDoObj = {
-        text: toDo,
+        text,
         id: Date.now(),
         fin: false,
     };
     toDos.push(toDoObj);
-    saveToDo(toDos);
-    renderer(toDoObj.text, toDoObj.id, toDoObj.fin);
+    saveToDo();
+    renderToDo(toDoObj.text, toDoObj.id, toDoObj.fin);
 };
 
-const saveToDo = (toDos) => {
-    localStorage.setItem(QUERY, JSON.stringify(toDos));
+const saveToDo = () => {
+    localStorage.setItem(QUERY_TODO, JSON.stringify(toDos));
+};
+const saveToDoFin = () => {
+    localStorage.setItem(QUERY_FIN, JSON.stringify(toDosFin));
 };
 
-const renderer = (element, id, fin) => {
-    const span = document.createElement("span");
-    const li = document.createElement("li");
-    const finBtn = document.createElement("button");
-    const delBtn = document.createElement("button");
-    li.innerHTML = `${element}`;
-    delBtn.innerHTML = "❌";
-    finBtn.innerHTML = "✔";
-    span.appendChild(li);
-    span.appendChild(delBtn);
-    span.appendChild(finBtn);
-    ul.appendChild(span);
-
-    delBtn.id = id;
-    delBtn.addEventListener("click", deleteToDo);
-};
-
-const deleteToDo = (e) => {
-    const id = e.target.parentNode.querySelector("button").id;
+const deleteFromToDo = (e) => {
+    const delObjId = e.target.parentNode.querySelector("button").id;
     e.target.parentNode.classList.add("hide");
-    const del = toDos.find((toDo) => toDo.id === Number(id));
-    const idx = toDos.indexOf(del);
 
-    if (idx > -1) toDos.splice(idx, 1);
-    saveToDo(toDos);
+    mutatesArr(DELETE, toDos, null, delObjId);
+};
+
+const deleteFromFin = (e) => {
+    const delObjId = e.target.parentNode.querySelector("button").id;
+    e.target.parentNode.classList.add("hide");
+
+    mutatesArr(DELETE_FIN, toDosFin, null, delObjId);
+};
+
+const finToDo = (e) => {
+    const finObjId = e.target.parentNode.querySelector("button").id;
+    e.target.parentNode.classList.add("hide");
+
+    mutatesArr(POSTPONE, toDos, toDosFin, finObjId);
+};
+
+const returnToDo = (e) => {
+    const returnObjId = e.target.parentNode.querySelector("button").id;
+    e.target.parentNode.classList.add("hide");
+
+    mutatesArr(RETURN, toDosFin, toDos, returnObjId);
+};
+
+const mutatesArr = (TYPE, mutateArr, inputArr, finObjId) => {
+    const mutationObj = mutateArr.find((toDo) => toDo.id === Number(finObjId));
+    const idx = mutateArr.indexOf(mutationObj);
+
+    switch (TYPE) {
+        case DELETE:
+            if (idx > -1) mutateArr.splice(idx, 1);
+
+            saveToDo();
+
+            break;
+
+        case DELETE_FIN:
+            if (idx > -1) mutateArr.splice(idx, 1);
+
+            saveToDoFin();
+
+            break;
+
+        case POSTPONE:
+            if (idx > -1) {
+                let finObj = mutateArr[idx];
+                finObj.fin = true;
+
+                inputArr.push(finObj);
+
+                mutateArr.splice(idx, 1);
+
+                const { text, id, fin } = finObj;
+                renderToDo(text, id, fin);
+            }
+            saveToDo();
+            saveToDoFin();
+
+            break;
+
+        case RETURN:
+            if (idx > -1) {
+                let finObj = mutateArr[idx];
+                finObj.fin = false;
+
+                inputArr.push(finObj);
+
+                mutateArr.splice(idx, 1);
+
+                const { text, id, fin } = finObj;
+                renderToDo(text, id, fin);
+            }
+            saveToDo();
+            saveToDoFin();
+
+            break;
+    }
 };
 
 const init = () => {
-    loadToDo();
+    loadToDo(QUERY_TODO, toDos);
+    loadToDo(QUERY_FIN, toDosFin);
     toDoForm.addEventListener("submit", handleToDo);
 };
 
 init();
+
+export { deleteFromFin, deleteFromToDo, finToDo, returnToDo };
