@@ -10,4 +10,7 @@
     "postcss": "^8.2.4",
     "tailwindcss": "^2.0.2"
   }
+  ,"scripts": {
+    "start" : "parcel ./src/main.html"
+  }
 }

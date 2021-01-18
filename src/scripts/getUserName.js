@@ -14,7 +14,7 @@ const paintingUserForm = () => {
         bootMessage.innerText = "Type Your Name!";
     } else {
         form.classList.add("form-remove");
-        bootMessage.innerText = `Welocome ${currentUser}`;
+        bootMessage.innerText = `Welcome ${currentUser}`;
     }
 };
 paintingUserForm();
