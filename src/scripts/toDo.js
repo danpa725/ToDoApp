@@ -57,10 +57,8 @@ const saveToDoFin = () => {
 };
 
 const deleteFromToDo = (e) => {
-    console.log(e.target.parentNode);
     const delObjId = e.target.parentNode.querySelector("button").id;
-    console.log(delObjId);
-    e.target.parentNode.classList.add("hide");
+    e.target.parentNode.parentNode.classList.add("hidden");
 
     mutatesArr(DELETE, toDos, null, delObjId);
 };
@@ -68,21 +66,21 @@ const deleteFromToDo = (e) => {
 const deleteFromFin = (e) => {
     const delObjId = e.target.parentNode.querySelector("button").id;
     console.log(delObjId);
-    e.target.parentNode.classList.add("hide");
+    e.target.parentNode.parentNode.classList.add("hidden");
 
     mutatesArr(DELETE_FIN, toDosFin, null, delObjId);
 };
 
 const finToDo = (e) => {
     const finObjId = e.target.parentNode.querySelector("button").id;
-    e.target.parentNode.classList.add("hide");
+    e.target.parentNode.parentNode.classList.add("hidden");
 
     mutatesArr(POSTPONE, toDos, toDosFin, finObjId);
 };
 
 const returnToDo = (e) => {
     const returnObjId = e.target.parentNode.querySelector("button").id;
-    e.target.parentNode.classList.add("hide");
+    e.target.parentNode.parentNode.classList.add("hidden");
 
     mutatesArr(RETURN, toDosFin, toDos, returnObjId);
 };

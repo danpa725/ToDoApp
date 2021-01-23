@@ -4,7 +4,19 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
+  
 }
+
+body::-webkit-scrollbar { 
+    display: none;
+}
+ul{
+    max-height: 30rem;
+}
+ul::-webkit-scrollbar { 
+    display: none;
+}
+
 .form-remove{
     display: none;
 }
@@ -30,3 +42,19 @@ button{
 .border-bottom{
     border-bottom: 2px solid black;
 }
+
+.img-setting{
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.del-img{
+    background-image: url("../icons/delete-icon.svg");
+}
+.fin-img{
+    background-image: url("../icons/finishing-icon.svg");
+}
+.append-img{
+    background-image: url("../icons/clock-icon.svg");
+}
+
