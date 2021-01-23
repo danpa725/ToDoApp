@@ -1,10 +1,20 @@
 body{
-    background-image: url("../images/dayStart.jpg");
     background-size:cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
-  
+}
+.day-start{
+    background-image: url("../images/dayStart.jpg");
+}
+.afternoon{
+    background-image: url("../images/afternoon.jpg");
+}
+.midnight{
+    background-image: url("../images/midnight.jpg");
+}
+.deep-night{
+    background-image: url("../images/deepNight.jpg");
 }
 
 body::-webkit-scrollbar { 
@@ -31,8 +41,8 @@ button{
 }
 
 .glass {
-    backdrop-filter: blur( 25.0px );
--webkit-backdrop-filter: blur( 25.0px );
+    backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
 }
 
 .border-make{
