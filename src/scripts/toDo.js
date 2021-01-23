@@ -6,19 +6,23 @@ const toDoInput = document.querySelector("#todo-input");
 const QUERY_TODO = "toDos";
 const QUERY_FIN = "toDosFin";
 
-let toDos = [];
-let toDosFin = [];
-
 const DELETE = "deleteToDo";
 const POSTPONE = "postponeToDo";
 const RETURN = "returnToDo";
 const DELETE_FIN = "deleteFin";
 
+let toDos = [];
+let toDosFin = [];
+
+//!----------------------------------------------------------------------------------------
+
 const loadToDo = (QUERY, setArr) => {
     let dbToDo = localStorage.getItem(QUERY);
     dbToDo = JSON.parse(dbToDo);
+
     if (dbToDo !== null) {
         const dbToDos = Object.values(dbToDo);
+        // 객체화 하기 but 순수 객체는 아니기에 객체의 valiue만 빼와서 arr에 대입.
         dbToDos.forEach((toDo) => {
             setArr.push(toDo);
             renderToDo(toDo.text, toDo.id, toDo.fin);
@@ -53,7 +57,9 @@ const saveToDoFin = () => {
 };
 
 const deleteFromToDo = (e) => {
+    console.log(e.target.parentNode);
     const delObjId = e.target.parentNode.querySelector("button").id;
+    console.log(delObjId);
     e.target.parentNode.classList.add("hide");
 
     mutatesArr(DELETE, toDos, null, delObjId);
@@ -61,6 +67,7 @@ const deleteFromToDo = (e) => {
 
 const deleteFromFin = (e) => {
     const delObjId = e.target.parentNode.querySelector("button").id;
+    console.log(delObjId);
     e.target.parentNode.classList.add("hide");
 
     mutatesArr(DELETE_FIN, toDosFin, null, delObjId);
@@ -111,6 +118,7 @@ const mutatesArr = (TYPE, mutateArr, inputArr, finObjId) => {
                 const { text, id, fin } = finObj;
                 renderToDo(text, id, fin);
             }
+
             saveToDo();
             saveToDoFin();
 
@@ -128,6 +136,7 @@ const mutatesArr = (TYPE, mutateArr, inputArr, finObjId) => {
                 const { text, id, fin } = finObj;
                 renderToDo(text, id, fin);
             }
+
             saveToDo();
             saveToDoFin();
 

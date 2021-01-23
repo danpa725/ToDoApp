@@ -9,8 +9,8 @@
     "parcel": "^1.12.4",
     "postcss": "^8.2.4",
     "tailwindcss": "^2.0.2"
-  }
-  ,"scripts": {
-    "start" : "parcel ./src/main.html"
+  },
+  "scripts": {
+    "start": "parcel ./src/main.html"
   }
 }

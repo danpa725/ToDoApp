@@ -1,4 +1,4 @@
-const form = document.querySelector(".js-form");
+const form = document.querySelector(".user-form");
 const input = form.querySelector("input");
 const bootMessage = document.querySelector(".boot-message");
 const resetBtn = document.querySelector(".reset-user");
@@ -10,10 +10,11 @@ const paintingUserForm = () => {
 
     // 사용자 이름이 존재하는 경우
     if (currentUser === null) {
-        form.classList.remove("form-remove");
-        bootMessage.innerText = "Type Your Name!";
+        form.classList.remove("hidden");
+        bootMessage.classList.add("hidden");
     } else {
-        form.classList.add("form-remove");
+        form.classList.add("hidden");
+        bootMessage.classList.remove("hidden");
         bootMessage.innerText = `Welcome ${currentUser}`;
     }
 };
