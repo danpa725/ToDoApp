@@ -14,7 +14,7 @@
     "tailwindcss": "^2.0.2"
   },
   "scripts": {
-    "start": "parcel ./src/main.html",
-    "build": "parcel build ./src/main.html"
+    "start": "parcel ./src/index.html",
+    "build": "parcel build src/index.html --out-dir docs --public-url ./"
   }
 }
