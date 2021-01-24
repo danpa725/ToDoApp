@@ -15,7 +15,7 @@ const paintingUserForm = () => {
     } else {
         form.classList.add("hidden");
         bootMessage.classList.remove("hidden");
-        bootMessage.innerText = `Welcome ${currentUser}`;
+        bootMessage.innerHTML = `Welcome </br>${currentUser}`;
     }
 };
 paintingUserForm();

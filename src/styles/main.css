@@ -1,70 +1,69 @@
-body{
-    background-size:cover;
+body {
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
 }
-.day-start{
+.day-start {
     background-image: url("../images/dayStart.jpg");
 }
-.afternoon{
+.afternoon {
     background-image: url("../images/afternoon.jpg");
 }
-.midnight{
+.midnight {
     background-image: url("../images/midnight.jpg");
 }
-.deep-night{
+.deep-night {
     background-image: url("../images/deepNight.jpg");
 }
 
-body::-webkit-scrollbar { 
+body::-webkit-scrollbar {
     display: none;
 }
-ul{
+ul {
     max-height: 30rem;
 }
-ul::-webkit-scrollbar { 
+ul::-webkit-scrollbar {
     display: none;
 }
 
-.form-remove{
+.form-remove {
     display: none;
 }
 .hide {
     display: none;
 }
-input{
+input {
     all: unset;
 }
-button{
+button {
     all: unset;
 }
 
 .glass {
-    backdrop-filter: blur( 10.0px );
--webkit-backdrop-filter: blur( 10.0px );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
-.border-make{
+.border-make {
     border-bottom: 3.5px solid white;
 }
 
-.border-bottom{
+.border-bottom {
     border-bottom: 2px solid black;
 }
 
-.img-setting{
-    background-size:cover;
+.img-setting {
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
-.del-img{
+.del-img {
     background-image: url("../icons/delete-icon.svg");
 }
-.fin-img{
+.fin-img {
     background-image: url("../icons/finishing-icon.svg");
 }
-.append-img{
+.append-img {
     background-image: url("../icons/clock-icon.svg");
 }
-

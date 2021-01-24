@@ -7,3 +7,6 @@ dist
 
 # private key
 .env
+
+#for private weather api key
+config.js
